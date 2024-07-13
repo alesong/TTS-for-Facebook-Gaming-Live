@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Facebook Live Chat Overlay",
+    "name": "TTS for Facebook Live",
     "version": "1.0",
-    "description": "Muestra el chat de Facebook Live en una ventana emergente transparente",
+    "description": "Asistente que lee y reproduce los chat de Facebook Live con voz natural.",
     "icons": {
       "16": "icon16.png",
       "48": "icon48.png",
