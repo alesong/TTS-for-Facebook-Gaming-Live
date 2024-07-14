@@ -9,6 +9,7 @@
       "128": "icon128.png"
     },
     "permissions": [
+      "TTS",
       "activeTab",
       "scripting",
       "storage"
