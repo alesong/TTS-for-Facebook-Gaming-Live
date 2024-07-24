@@ -18,6 +18,16 @@ document.addEventListener('DOMContentLoaded', function() {
             option.textContent = `${voz.name} (${voz.lang})`;
             vozSelect.appendChild(option);
         });
+        const option1 = document.createElement('option');
+        option1.value = 100;  //Este index es el aleatorio, se deja un número mayor para que no se repita con los del forEach.
+        option1.textContent = `Aleatorio (es-ES)`;
+        vozSelect.appendChild(option1);
+
+        const option2 = document.createElement('option');
+        option2.value = 101;  //Este index es el aleatorio, se deja un número mayor para que no se repita con los del forEach.
+        option2.textContent = `Aleatorio (en-US)`;
+        vozSelect.appendChild(option2);
+
         cargarConfiguracion();
     }
 
@@ -63,8 +73,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const texto = textoInput.value;
         const velocidad = parseFloat(velocidadInput.value);
         const volumen = parseFloat(volumenInput.value);
-        const vozIndex = parseInt(vozSelect.value);
-
+        let vozIndex = parseInt(vozSelect.value);
+        if (vozIndex === 100) {
+            //Aleatorio
+            const miArregloDeVozes = [0, 4, 5]; //indices de voces en es-ES
+            const indiceAleatorio = Math.floor(Math.random() * miArregloDeVozes.length);
+            vozIndex = miArregloDeVozes[indiceAleatorio];
+        }
+        if (vozIndex === 101) {
+            //Aleatorio
+            const miArregloDeVozes = [1, 2, 3]; //indices de voces en en-US
+            const indiceAleatorio = Math.floor(Math.random() * miArregloDeVozes.length);
+            vozIndex = miArregloDeVozes[indiceAleatorio];
+        }
+        
         const utterance = new SpeechSynthesisUtterance(texto);
         utterance.rate = velocidad;
         utterance.volume = volumen;

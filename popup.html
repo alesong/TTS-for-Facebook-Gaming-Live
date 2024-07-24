@@ -7,13 +7,57 @@
         body { width: 300px; padding: 10px; font-family: Arial, sans-serif; }
         label { display: block; margin-top: 10px; }
         select, input[type="range"] { width: 100%; }
+        button { margin-top: 10px; }
+        #texto { width: 100%; }
+        #imgPaypalLogo { 
+            width: 32px;
+            margin-top: -20px;
+            margin-bottom: -12px;
+            margin-right: 20px;
+            margin-left: -62px;
+         }
+        #donationSection {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            text-align: center;
+        }
+        #explicationMessage {
+            font-size: 14px;
+            text-align: justify;
+        }
+        #donationMessage {
+            font-size: 11px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        #donateButton { 
+            display: block; 
+            width: calc(100%-15px); 
+            margin-top: 20px; 
+            padding: 10px; 
+            background-color: #0070ba; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            text-align: center; 
+            text-decoration: none; 
+            font-weight: bold;
+        }
+        #donateButton:hover { 
+            background-color: #005ea6; 
+        }
     </style>
 </head>
 <body>
     <h2>Control de Síntesis de Voz</h2>
+
+    <p id="explicationMessage">Abrir una transmisión en vivo de Facebook Gaming para escuchar en tiempo real la actividad del chat.</p>
     
     <label for="texto">Texto a leer:</label>
-    <textarea id="texto" rows="3" cols="30">Hola, esto es una prueba.</textarea>
+    <textarea id="texto" rows="1" cols="30">Esto es una prueba.</textarea>
     
     <label for="velocidad">Velocidad:</label>
     <input type="range" id="velocidad" min="0.5" max="2" step="0.1" value="1">
@@ -28,6 +72,16 @@
     
     <button id="hablar">Hablar</button>
     <button id="detener">Detener</button>
+
+    <div id="donationSection">
+        <p id="donationMessage">
+            ¿Te gusta esta extensión? Tu apoyo me ayuda a seguir mejorándola y manteniéndola gratuita. 
+            Cualquier donación, por pequeña que sea, es muy apreciada. ¡Gracias por tu generosidad!
+        </p>
+        <a id="donateButton" href="https://www.paypal.com/donate/?hosted_button_id=TL9G8CA5FKSME" target="_blank">
+            <img id="imgPaypalLogo" src="paypal_logo.png" alt="Pp"> Donar con PayPal 
+        </a>
+    </div>
 
     <script src="popup.js"></script>
 </body>

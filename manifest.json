@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "TTS for Facebook Live",
+    "name": "TTS for Facebook Gaming Live (Beta)",
     "version": "1.0",
-    "description": "Asistente que lee y reproduce los chat de Facebook Live con voz natural.",
+    "description": "Asistente que lee y reproduce en audio los chat de Facebook Gaming Live con voz natural.",
     "icons": {
       "16": "icon16.png",
       "48": "icon48.png",
@@ -11,17 +11,21 @@
     "permissions": [
       "TTS",
       "activeTab",
+      "tabs",
       "scripting",
       "storage"
     ],
     "host_permissions": [
-      "https://www.facebook.com/*"
+      "https://www.facebook.com/*",
+      "https://www.paypal.com/*"
     ],
     "action": {
       "default_popup": "popup.html"
     },
+
     "background": {
-      "service_worker": "background.js"
+      "scripts": ["background.js"],
+      "persistent": true
     },
     "content_scripts": [
       {
