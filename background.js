@@ -28,7 +28,7 @@ const checkIntervalMinutes = 60; // Intervalo de verificación en minutos
 
 // Función para verificar la nueva versión
 function checkForUpdates() {
-  fetch('http://localhost:3000/json/endPointVersionFGLTTS.json')
+  fetch('http://45.173.12.90:3000/json/endPointVersionFGLTTS.json')
     .then(response => response.json())
     .then(data => {
         console.log(data);

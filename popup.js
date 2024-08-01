@@ -120,3 +120,26 @@ function existsElementById(id) {
     b.style.fontSize = '50px';
     b.innerHTML = 'No hay botón de donación';
   }
+
+
+  function checkForUpdates() {
+    const manifest = chrome.runtime.getManifest();
+    const currentVersion = manifest.version;
+    console.log('la versión actual es: '+currentVersion);
+    fetch(`http://45.173.12.90:3000/json/endPointVersionFGLTTS.json`)
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+        if (data.version > currentVersion) {
+          let updates = document.getElementById('updates');
+          updates.innerHTML = `La versión ${data.version} está disponible. Haz clic para descargar.`;
+          updates.style.display = 'block';
+          updates.addEventListener('click', () => window.open(data.download_url, '_blank'));
+          updates.style.cursor = 'pointer';
+          updates.style.color = 'green';
+          updates.style.fontWeight = 'bold';
+        }
+      })
+  }
+
+  checkForUpdates()
