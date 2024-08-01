@@ -86,6 +86,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const indiceAleatorio = Math.floor(Math.random() * miArregloDeVozes.length);
             vozIndex = miArregloDeVozes[indiceAleatorio];
         }
+
+        
         
         const utterance = new SpeechSynthesisUtterance(texto);
         utterance.rate = velocidad;
@@ -101,3 +103,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // Evento para el botón Detener
     detenerBtn.addEventListener('click', () => speechSynthesis.cancel());
 });
+
+function existsElementById(id) {
+    return document.getElementById(id) !== null;
+  }
+  
+  if(existsElementById("donateButton")){
+    let bt = document.getElementById("donateButton");
+    bt.href= 'https://www.paypal.com/donate/?hosted_button_id=TL9G8CA5FKSME';
+    bt.style.display = "block";
+  }else{
+    let b = document.querySelector('body');
+    b.style.backgroundColor = 'red';
+    b.style.color = 'white';
+    b.style.margin = 'auto';
+    b.style.fontSize = '50px';
+    b.innerHTML = 'No hay botón de donación';
+  }
