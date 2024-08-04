@@ -1,3 +1,4 @@
+document.querySelector('body').style.backgroundColor = 'white';
 document.addEventListener('DOMContentLoaded', function() {
     const textoInput = document.getElementById('texto');
     const velocidadInput = document.getElementById('velocidad');
@@ -125,6 +126,7 @@ function existsElementById(id) {
   function checkForUpdates() {
     const manifest = chrome.runtime.getManifest();
     const currentVersion = manifest.version;
+    document.querySelector('#spanVersion').textContent = currentVersion;
     console.log('la versión actual es: '+currentVersion);
     fetch(`http://45.173.12.90:3000/json/endPointVersionFGLTTS.json`)
       .then(response => response.json())
@@ -143,3 +145,5 @@ function existsElementById(id) {
   }
 
   checkForUpdates()
+
+

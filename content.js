@@ -89,6 +89,14 @@ setInterval(() => {
         console.log(elementoNombre);        
         console.log(elementoChat);
 
+        let img = document.querySelector('#imgBot');
+        if (elementoNombre) {
+            img.style.border = 'solid 4px #65ff65';
+            
+        }else{
+            img.style.border = 'none';
+        }
+
         let texto = `${elementoNombre}: ${elementoChat}`;
         hablar(texto);
         
@@ -99,27 +107,61 @@ setInterval(() => {
 
 function crearBotonPopup() {
     const boton = document.createElement('div');
-    boton.innerHTML = '🎤';
+    let estiloControles = `
+    border:1px solid gray;
+    display:inline-block;
+    padding:4px 8px 4px 8px;
+    margin:0px -1px;
+    background: linear-gradient(rgba(255,255,255,0.5), rgba(0,0,0,0.5));
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.75);
+    cursor:pointer;
+    `;
+    // Obtener las URL completas de las imágenes
+    const icon48Url = chrome.runtime.getURL('icon48.png');
+    const volumeIconUrl = chrome.runtime.getURL('volume_icon.png');
+    const stopIconUrl = chrome.runtime.getURL('stop_icon.png');
+    const settingsIconUrl = chrome.runtime.getURL('settings_icon.png');
+    boton.innerHTML = `
+        <div style="display: inline-block;"><img id="imgBot" style="width: 48px; height: 48px; position: relative; top: 12px; border-radius: 50%; margin-right: 5px;" src="https://media.istockphoto.com/id/1605069902/es/vector/chatbot-icon.jpg?s=2048x2048&w=is&k=20&c=rAHkJBLw9-h2kwWTqyp3AOezXwtk5EC7vl85mp5nhOs="></div>
+        <div id="controlPlay"  style="${estiloControles} border-radius: 15px 0px 0px 15px;"><img style="width: 30px; height: 30px;" src="https://cdn3.iconfinder.com/data/icons/computer-and-it-3d/512/speeker-sound-audio-music-volume-broadcast-play.png"></div>
+        <div id="controlStop"  style="${estiloControles} display: none;"><img style="width: 15px; height: 15px;" src="./stop_icon.png"></div>
+        <div id="controlSettings"  style="${estiloControles} border-radius: 0px 15px 15px 0px;"><img style="width: 30px; height: 30px;" src="https://cdn2.iconfinder.com/data/icons/buno-ui-interface/32/__settings_gear_options-512.png"></div>
+    `;
     boton.style.cssText = `
         position: fixed;
-        bottom: 20px;
+        bottom: 78px;
         right: 20px;
-        background-color: rgba(0,0,0,0.25);
-        color: white;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
         text-align: center;
-        line-height: 50px;
-        font-size: 12px;
-        cursor: pointer;
         z-index: 9999;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        
     `;
     boton.title = "Abrir controles de síntesis de voz";
+    boton.id = 'botonPopup';
+
     
-    boton.addEventListener('click', function() {
-        console.log("Botón clickeado, guardando estado para abrir popup");
+    document.body.appendChild(boton);
+}
+
+crearBotonPopup();
+
+
+document.getElementById('controlPlay').addEventListener('click', controlPlay);
+document.getElementById('controlStop').addEventListener('click', controlStop);
+document.getElementById('controlSettings').addEventListener('click', controlSettings);
+
+function controlPlay() {
+    console.log('controlPlay');
+    location.reload();
+}
+
+function controlStop() {
+    console.log('controlStop');
+    
+}
+
+function controlSettings() {
+    console.log('controlSettings');
+    console.log("Botón clickeado, guardando estado para abrir popup");
         chrome.storage.local.set({openPopup: true}, function() {
             if (chrome.runtime.lastError) {
                 console.error("Error al guardar estado:", chrome.runtime.lastError);
@@ -127,9 +169,6 @@ function crearBotonPopup() {
                 console.log("Estado guardado para abrir popup");
             }
         });
-    });
     
-    document.body.appendChild(boton);
 }
 
-crearBotonPopup();

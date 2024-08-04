@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "TTS for Facebook Gaming Live (Beta)",
     "author": "Alesongg",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "Asistente que lee y reproduce en audio los chat de Facebook Gaming Live con voz natural.",
     "icons": {
       "16": "icon16.png",
@@ -20,7 +20,8 @@
     "host_permissions": [
       "https://www.facebook.com/*",
       "https://www.paypal.com/*",
-      "http://45.173.12.90:3000/*"
+      "http://45.173.12.90:3000/*",
+      "https://www.iconfinder.com/*"
     ],
     "action": {
       "default_popup": "popup.html"
