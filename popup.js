@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const vozSelect = document.getElementById('voz');
     const hablarBtn = document.getElementById('hablar');
     const detenerBtn = document.getElementById('detener');
+    const divHijoInput = document.getElementById('divHijo');
 
     // Cargar voces disponibles
     function cargarVoces() {
@@ -38,11 +39,34 @@ document.addEventListener('DOMContentLoaded', function() {
         speechSynthesis.onvoiceschanged = cargarVoces;
     }
 
+    function cargarDivHijo() {
+        chrome.storage.sync.get(['divHijo'], function(result) {
+        if (result.divHijo) {
+            const perimeraOpcion = document.createElement('option')
+            perimeraOpcion.value = result.divHijo
+            perimeraOpcion.textContent = 'Vivo ' + result.divHijo
+            divHijoInput.appendChild(perimeraOpcion)  
+        }
+            const divHijos = [20, 21]
+            divHijos.forEach((divHijo) => {
+                const opcion = document.createElement('option')
+                opcion.value = divHijo
+                opcion.textContent = 'Vivo ' + divHijo
+                divHijoInput.appendChild(opcion)
+            })
+            divHijo.addEventListener('change', () => {
+            guardarConfiguracion()
+        })
+        });
+    }
+    cargarDivHijo();
+
     // Cargar configuración guardada
     function cargarConfiguracion() {
-        chrome.storage.sync.get(['velocidad', 'volumen', 'vozIndex'], function(result) {
+        chrome.storage.sync.get(['velocidad', 'volumen', 'vozIndex', 'divHijo'], function(result) {
             if (result.velocidad) velocidadInput.value = result.velocidad;
             if (result.volumen) volumenInput.value = result.volumen;
+            if (result.divHojo) divHijo.value = result.divHijo;
             if (result.vozIndex !== undefined) vozSelect.value = result.vozIndex;
             velocidadValor.textContent = velocidadInput.value;
             volumenValor.textContent = volumenInput.value;
@@ -54,7 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
         chrome.storage.sync.set({
             velocidad: velocidadInput.value,
             volumen: volumenInput.value,
-            vozIndex: vozSelect.value
+            vozIndex: vozSelect.value,
+            divHijo: divHijo.value
         });
     }
 

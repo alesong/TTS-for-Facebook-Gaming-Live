@@ -70,7 +70,7 @@ setInterval(() => {
 
     chrome.storage.sync.get(['divHijo'], function(result) {
         if (result.divHijo) {
-            //console.log("divHijo:", result.divHijo);
+            console.log("divHijo:", result.divHijo);
             
             divHijo = result.divHijo
                 
@@ -91,39 +91,30 @@ setInterval(() => {
         let elementoPersona = elementoBox;
         let elementoNombre = elementoPersona.childNodes[divlist-1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0];
         let elementoChat = elementoPersona.childNodes[divlist-1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[1];
-        //let elementoRespuestaNombre = elementoBox.childNodes[divlist-2].childNodes[0].childNodes[0].childNodes[0].childNodes[0];
-        //let elementoRespuesta = elementoBox.childNodes[divlist-2].childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0];
-        
+        if (elementoChat === undefined) {
+            console.log('elementoChat es undefined');
+            
+        }
         //console.log('elemento');
         //console.log(elementoNombre);
-        //console.log(elementoRespuesta);
-        //console.log(elementoRespuestaNombre);
-        
         elementoNombre = elementoNombre.textContent;
         elementoChat = elementoChat.textContent;
-        //elementoRespuesta = elementoRespuesta.textContent;
-        //elementoRespuestaNombre = elementoRespuestaNombre.textContent;
-        
         console.log(elementoNombre);        
         console.log(elementoChat);
-        //console.log(elementoRespuesta);
-        //console.log(elementoRespuestaNombre);
 
         let img = document.querySelector('#imgBot');
         if (elementoNombre) {
             img.style.border = 'solid 4px #65ff65';
-            let texto = `${elementoNombre}: ${elementoChat}`;
-            //let texto = `${elementoRespuestaNombre}`;
-            hablar(texto);
             
         }else{
             img.style.border = 'none';
         }
 
-        
+        let texto = `${elementoNombre}: ${elementoChat}`;
+        hablar(texto);
         
         ultimoDivList = divlist;
-        //console.log('ultimoDivList:',ultimoDivList);
+        console.log('ultimoDivList:',ultimoDivList);
         
     }
 }, 1000);
@@ -136,7 +127,7 @@ function crearBotonPopup() {
     display:inline-block;
     padding:4px 8px 4px 8px;
     margin:0px -1px;
-    background: linear-gradient(rgba(255,255,255,0.5), rgba(0,0,0,0.9));
+    background: linear-gradient(rgba(255,255,255,0.5), rgba(0,0,0,0.5));
     box-shadow: 0px 2px 5px rgba(0,0,0,0.75);
     cursor:pointer;
     `;
